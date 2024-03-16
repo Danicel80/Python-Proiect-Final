@@ -20,4 +20,4 @@ aceste template-uri mai sunt și template-uri mai mici,
  sa zicem fragmente, ce se includ în template-urile 
 principale.
 
-- Tot în Main avem și fișierul models.py ce conține structura bazei de date și directorul Static ce conține imaginile afisate în site și fișierul style.css ce conține stitul de afisare a etichetelor HTML din template-uri.
+- Tot în Main avem și fișierul models.py ce conține structura bazei de date și directorul Static ce conține imaginile afisate în site și fișierul style.css ce conține stilul de afisare a etichetelor HTML din template-uri.
