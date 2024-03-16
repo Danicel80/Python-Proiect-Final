@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Mag-X - Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script type="text/javascript">
+        var reg_form_status = "off";
+        var msg = "{{ alert_msg }}";
+        if (msg != "")
+            {
+            alert(msg);
+            }
+        function switch_reg()
+            {
+            if(reg_form_status === "off")
+                {
+                document.getElementById('register_form').style.display = "block";
+                document.getElementById('login_form').style.display = "none";
+                document.getElementById('reg_log').innerHTML = "Login";
+                reg_form_status = "on";
+                }
+            else
+                {
+                document.getElementById('register_form').style.display = "none";
+                document.getElementById('login_form').style.display = "block";
+                document.getElementById('reg_log').innerHTML = "Creaza cont";
+                reg_form_status = "off";
+                }
+            }
+        function get_gen_pas()
+            {
+            const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            var xhr = new XMLHttpRequest();
+	        xhr.open("POST", "get_pas", true);
+	        xhr.setRequestHeader("X-CSRFToken",csrf_token);
+	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	        xhr.send();
+	        xhr.onreadystatechange=function()
+	    	    {
+	    	    if (xhr.readyState==4)
+			        {
+			        if (xhr.status==200 || window.location.href.indexOf("http")==-1)
+			    	    {
+			    	    document.getElementById("reg_input_pas_1").value = xhr.responseText;
+			    	    document.getElementById("reg_input_pas_2").value = xhr.responseText;
+			    	    }
+			    	else { alert("ATENTIE!!!\nEroare in cerere"); }
+				    }
+			    }
+            }
+    </script>
+</head>
+<body>
+    <div id="main_container">
+        <div id="login_main_content">
+            <div id="login_container">
+                <div id="div_login_name">
+                    <img id="login_img_logo" class="img_container_dim" src="{% static 'images/logo.png' %}" alt="Logo">
+                </div>
+                <div id="div_login_form">
+                    <form id="login_form" action="" method="POST">
+                        {% csrf_token %}
+                        <label id="log_label_user" class="f_label" for="log_input_user">Email:</label>
+                        <br>
+                        <input id="log_input_user" class="f_input" type="text" name="user_email">
+                        <br>
+                        <label id="log_label_pas" class="f_label" for="log_input_pas">Parola:</label>
+                        <br>
+                        <input id="log_input_pas" class="f_input" type="password" name="user_pas">
+                        <br><br>
+                        <input id="f_log_btn" class="f_btn" type="submit" name="form" value="Login">
+                    </form>
+                    <form id="register_form" action="" method="POST">
+                        {% csrf_token %}
+                        <label id="reg_label_user_name" class="f_label" for="reg_input_user_name">Username:</label>
+                        <br>
+                        <input id="reg_input_user_name" class="f_input" type="text" name="user_name">
+                        <br>
+                        <label id="reg_label_user_email" class="f_label" for="reg_input_user_email">Email:</label>
+                        <br>
+                        <input id="reg_input_user_email" class="f_input" type="text" name="user_email">
+                        <br>
+                        <label id="reg_label_pas_1" class="f_label" for="reg_input_pas_1">Introduceti o parola:</label>
+                        <br>
+                        <input id="reg_input_pas_1" class="f_input" type="text" name="user_pas_1">
+                        <div id="login_gen_pas" onclick="get_gen_pas()">
+                            <span >Genereaza Parola</span>
+                        </div>
+                        <label id="reg_label_pas_2" class="f_label" for="reg_input_pas_2">Reintroduceti parola:</label>
+                        <br>
+                        <input id="reg_input_pas_2" class="f_input" type="text" name="user_pas_2">
+                        <br><br>
+                        <input id="f_reg_btn" class="f_btn" type="submit" name="form" value="Creaza Cont">
+                    </form>
+                    <div id="div_reg">
+                        <span id="reg_log" onclick="switch_reg()">Creeaza cont</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom_container">
+
+        </div>
+    </div>
+</body>
+</html>

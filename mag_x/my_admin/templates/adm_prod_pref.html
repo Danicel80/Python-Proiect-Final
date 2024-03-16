@@ -1,0 +1,29 @@
+{% load static %}
+<div id="prod_{{ prod_id }}" data-prod_id="{{ prod_id }}" class="adm_prod_container">
+    <div class="adm_pref_prod_foto">
+        <div id="prod_foto_{{ prod_id }}" class="adm_prod_foto">
+            <img class="img_container_dim" src="{% static 'prod_images/' %}{{ prod_img }}" alt="Product {{ prod_img }}">
+        </div>
+    </div>
+    <div class="adm_pref_prod_text">
+        <div id="prod_brand_{{ prod_id }}" class="prod_text">
+            <span>{{ prod_brand }}</span>
+        </div>
+        <div id="prod_model_{{ prod_id }}" class="prod_text">
+            <span>{{ prod_model }}</span>
+        </div>
+        <div id="prod_price_{{ prod_id }}" class="price_text">
+            <span>Pret {{ prod_price }} Lei</span>
+        </div>
+    </div>
+    <div class="adm_pref_prod_ctrl">
+        <div id="prod_ctrl_{{ prod_id }}" class="prod_ctrl_adm">
+            <div id="prod_add_cos_{{ prod_id }}" class="prod_cos" onclick="xml_request('POST', 'rec_cart_adm','prod_id={{ prod_id }}' ,1)">
+                <span>Adauga in Cos</span>
+            </div>
+            <div id="prod_sterge_{{ prod_id }}" class="prod_cos" onclick="xml_request('POST', 'del_pref','prod_id={{ prod_id }}' ,1)">
+                <span>Sterge</span>
+            </div>
+        </div>
+    </div>
+</div>

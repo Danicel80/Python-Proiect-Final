@@ -1,0 +1,48 @@
+{% extends "base.html "%}
+
+{% block content%}
+<script type="text/javascript">
+var msg = "{{ alert_msg }}";
+if (msg != "") {
+    alert(msg);
+}
+</script>
+
+<div id="contact_container" class="main_content">
+    <div id="contact_left">
+        <span class="span_text">{{ contact_main_txt }}</span>
+        <span class="span_text">{{ contact_info }}</span>
+    </div>
+    <div id="contact_right">
+        <form id="contact_form" action="" method="POST">
+            {% csrf_token %}
+            <div>
+                <label id="f_label_name" class="f_label undefined" for="f_input_name">Nume:</label>
+                <br>
+                <input id="f_input_name" class="f_input undefined" type="text" name="name" value="">
+                <br><br>
+            </div>
+            <div>
+                <label id="f_label_email" class="f_label undefined" for="f_input_email">Email:</label>
+                <br>
+                <input id="f_input_email" class="f_input undefined" type="text" name="email" value="">
+                <br><br>
+            </div>
+            <div>
+                <label id="f_label_phone" class="f_label undefined" for="f_input_phone">Tel:</label>
+                <br>
+                <input id="f_input_phone" class="f_input undefined" type="text" name="phone" value="">
+                <br><br>
+            </div>
+            <div>
+                <label id="f_label_message" class="f_label" for="f_text_message">Mesaj:</label>
+                <br>
+                <textarea id="f_text_message" class="f_text" name="message"></textarea>
+                <br><br>
+            </div>
+            <br><br>
+            <input id="submit" type="submit" class="f_btn" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}

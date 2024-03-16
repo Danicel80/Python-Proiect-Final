@@ -1,0 +1,38 @@
+{% extends "base.html "%}
+
+{% block content%}
+
+<div id="adm_container" class="main_content">
+    <div id="adm_left">
+        <div id="adm_left_pref" class="prod_cos" onclick="show_section('pref')">
+            <span>Produse Preferate</span>
+        </div>
+        <div id="adm_left_bas" class="prod_cos" onclick="show_section('basket')">
+            <span>Cosul cu produse</span>
+        </div>
+    </div>
+    <div id="adm_right">
+        <div id="adm_right_text">
+            <span>Bine ati venit in adminpanel, alegeti din meniul din partea dreapta sectiunea pe care doriti sa o gestionati</span>
+        </div>
+        <div id="adm_right_pref">
+            <h2 style="text-align: center;">Produse Preferate</h2>
+            {% for prod in pref_prod_list %}
+            {% include "adm_prod_pref.html" with prod_id=prod.prod_id prod_img=prod.prod_img prod_brand=prod.prod_brand prod_model=prod.prod_model prod_price=prod.prod_price %}
+            {% endfor %}
+        </div>
+        <div id="adm_right_basket">
+            <h2 style="text-align: center;">Cosul de produse</h2>
+            {% for prod in bas_prod_list %}
+            {% include "adm_prod_cos.html" with prod_id=prod.prod_id prod_img=prod.prod_img prod_brand=prod.prod_brand prod_model=prod.prod_model prod_price=prod.prod_price %}
+            {% endfor %}
+        </div>
+        <script type="text/javascript">
+            if(window.location.hash)
+                {
+                show_section(window.location.hash.substr(1));
+                }
+        </script>
+    </div>
+</div>
+{% endblock %}

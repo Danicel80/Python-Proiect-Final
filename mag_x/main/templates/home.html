@@ -1,0 +1,13 @@
+{% extends "base.html "%}
+
+{% block content%}
+<div id="home_container" class="main_content">
+    {% for prod in prod_list %}
+    {% if login %}
+    {% include "prod_login.html" with prod_id=prod.prod_id prod_img=prod.prod_img prod_brand=prod.prod_brand prod_model=prod.prod_model prod_price=prod.prod_price %}
+    {% else %}
+    {% include "prod.html" with prod_id=prod.prod_id prod_img=prod.prod_img prod_brand=prod.prod_brand prod_model=prod.prod_model prod_price=prod.prod_price %}
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

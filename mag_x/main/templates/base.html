@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Mag-X - Buy More</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script type="text/javascript">
+        var adm_active_section = "";
+        function show_section(name)
+        {
+        if(adm_active_section == "")
+            {
+            document.getElementById("adm_right_"+name).style.display = "block";
+            adm_active_section = name;
+            }
+        else
+            {
+            document.getElementById("adm_right_"+adm_active_section).removeAttribute("style");
+            document.getElementById("adm_right_"+name).style.display = "block";
+            adm_active_section = name;
+            }
+        }
+    function xml_request(tip, proc_file, data, header)
+	    {
+	    const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	    var xhr = new XMLHttpRequest();
+	    xhr.open(tip, proc_file, true);
+	    xhr.setRequestHeader("X-CSRFToken",csrf_token);
+	    if(header == 1){ xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded"); }
+	    if(header == 2){ xhr.setRequestHeader("Content-type","multipart/form-data"); }
+	    xhr.send(data);
+	    xhr.onreadystatechange=function()
+	    	{
+	    	if (xhr.readyState==4)
+			    {
+			    if (xhr.status==200 || window.location.href.indexOf("http")==-1)
+			    	{
+			    	    if(proc_file == "rec_cart_adm" || proc_file == "del_cart" || proc_file == "del_pref")
+			    	        {
+			    	        if(xhr.responseText != "")
+			    	            {
+			    	            alert(xhr.responseText);
+			    	            }
+			    	        else
+			    	            {
+			    	            location.reload();
+			    	            }
+			    	        }
+			    	    else
+			    	        {
+			    	        if(xhr.responseText != "")
+			    	            {
+			    	            alert(xhr.responseText);
+			    	            }
+			    	        }
+				    }
+			    else { alert("ATENTIE!!!\nEroare in cerere"); }
+			    }
+		    }
+	    }
+    </script>
+</head>
+<body>
+    <div id="main_container">
+        <div id="top_container">
+            <div id="div_logo" class="logo">
+                <img id="base_img_logo" class="img_container_dim" src="{% static 'images/logo.png' %}" alt="Logo">
+            </div>
+            <div id="div_menu" class="menu">
+                <div id="sec_menu">
+                    {% if login %}
+                    <a id="a_menu_adm_pref" class="a_sec_menu" href="/adm#pref">
+                        <img id="img_preferate" class="sec_menu_img img_container_dim" src="{% static 'images/heart.png' %}" alt="Imagine Produse Preferate">
+                    </a>
+                    <a id="a_menu_adm_bas" class="a_sec_menu" href="/adm#basket">
+                        <img id="img_cart" class="sec_menu_img img_container_dim" src="{% static 'images/shopping_cart.png' %}" alt="Imagine Shopping Cart">
+                    </a>
+                    {% else %}
+                    {% endif %}
+                    {% if login %}
+                    {% csrf_token %}
+                    <a id="a_menu_logout" class="a_sec_menu" href="/logout">
+                        <img id="img_logout" class="sec_menu_img img_container_dim" src="{% static 'images/logout.png' %}" alt="Imagine Login">
+                    </a>
+                    {% else %}
+                    <a id="a_menu_login" class="a_sec_menu" href="/login">
+                        <img id="img_login" class="sec_menu_img img_container_dim" src="{% static 'images/login.png' %}" alt="Imagine Login">
+                    </a>
+                    {% endif %}
+                </div>
+                <div id="div_main_menu">
+                    <menu id="main_menu">
+                        <li class="li_menu">
+                            <a id="a_menu_prod" class="a_menu" href="/">Produse</a>
+                        </li>
+                        <li class="li_menu">
+                            <a id="a_menu_about" class="a_menu" href="/about">Despre noi</a>
+                        </li>
+                        <li class="li_menu">
+                            <a id="a_menu_contact" class="a_menu" href="/contact">Contact</a>
+                        </li>
+                    </menu>
+                </div>
+            </div>
+        </div>
+            {% block content %}
+            {% endblock %}
+        <div id="bottom_container">
+            <span>Creat de: Danicel Alexandru</span>
+        </div>
+    </div>
+</body>
+</html>

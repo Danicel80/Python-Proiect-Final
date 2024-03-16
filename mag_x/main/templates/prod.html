@@ -1,0 +1,30 @@
+{% load static %}
+<div id="prod_{{ prod_id }}" data-prod_id="{{ prod_id }}" class="prod_container">
+    <div id="prod_foto_{{ prod_id }}" class="prod_foto">
+        <a id="a_detail_img_{{ prod_id }}" class="a_detail" href="/detail?p={{ prod_id }}">
+            <img class="img_container_dim" src="{% static 'prod_images/' %}{{ prod_img }}" alt="Product {{ prod_img }}">
+        </a>
+    </div>
+    <div id="prod_brand_{{ prod_id }}" class="prod_text">
+        <span>{{ prod_brand }}</span>
+    </div>
+    <div id="prod_model_{{ prod_id }}" class="prod_text">
+        <span>{{ prod_model }}</span>
+    </div>
+    <div id="prod_price_{{ prod_id }}" class="price_text">
+        <span>Pret {{ prod_price }} Lei</span>
+    </div>
+    <div id="prod_ctrl_{{ prod_id }}" class="prod_ctrl">
+        <div id="prod_pref_{{ prod_id }}" class="prod_pref">
+
+        </div>
+        <div id="prod_cos_{{ prod_id }}" class="prod_cos">
+            <a id="a_detail_{{ prod_id }}" class="a_detail" href="/detail?p={{ prod_id }}">
+                <span>Click pt. detalii</span>
+            </a>
+        </div>
+        <div class="prod_pref">
+
+        </div>
+    </div>
+</div>
