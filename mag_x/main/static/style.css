@@ -233,7 +233,7 @@ a:active, a:link, a:visited
 #login_main_content
 {
  width: 100%;
- height: calc(100% - 150px);
+ height: calc(100% - 50px);
 }
 
 #login_container

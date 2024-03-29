@@ -24,7 +24,7 @@ def create_user(name, email, password):
 def user_login(request):
     data = {"alert_msg": ""}
     user_log = Logs(log_name="user_login.log",
-                    log_location="C:\\Users\\LEXX\\PycharmProjects\\mag-x\\mag_x\\",
+                    log_location="",
                     log_dir="user_logs")
     if request.method == "POST":
         print(request.POST)
