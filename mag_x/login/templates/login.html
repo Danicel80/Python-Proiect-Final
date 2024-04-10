@@ -28,6 +28,18 @@
                 reg_form_status = "off";
                 }
             }
+        function show_pas(id)
+            {
+            var element = document.getElementById(id);
+            if(element.type == "text")
+                {
+                element.type = "password";
+                }
+            else
+                {
+                element.type = "text";
+                }
+            }
         function get_gen_pas()
             {
             const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -61,13 +73,16 @@
                 <div id="div_login_form">
                     <form id="login_form" action="" method="POST">
                         {% csrf_token %}
-                        <label id="log_label_user" class="f_label" for="log_input_user">Email:</label>
+                        <label id="log_label_user" class="f_label" for="log_input_user">Username:</label>
                         <br>
-                        <input id="log_input_user" class="f_input" type="text" name="user_email">
+                        <input id="log_input_user" class="f_input" type="text" name="user_name">
                         <br>
                         <label id="log_label_pas" class="f_label" for="log_input_pas">Parola:</label>
                         <br>
                         <input id="log_input_pas" class="f_input" type="password" name="user_pas">
+                        <br>
+                        <input type="checkbox" id="f_checkbox_v_pas" onclick="show_pas('log_input_pas')" name="v_pas">
+                        <label class="f_label" for="f_checkbox_v_pas">Arata parola</label>
                         <br><br>
                         <input id="f_log_btn" class="f_btn" type="submit" name="form" value="Login">
                     </form>
@@ -83,13 +98,23 @@
                         <br>
                         <label id="reg_label_pas_1" class="f_label" for="reg_input_pas_1">Introduceti o parola:</label>
                         <br>
-                        <input id="reg_input_pas_1" class="f_input" type="text" name="user_pas_1">
-                        <div id="login_gen_pas" onclick="get_gen_pas()">
-                            <span >Genereaza Parola</span>
+                        <input id="reg_input_pas_1" class="f_input" type="password" name="user_pas_1">
+                        <div id="pass_tool_container">
+                            <div id="v_pas_1" class="pass_tool">
+                                <input type="checkbox" id="f_checkbox_v_pas_1" onclick="show_pas('reg_input_pas_1')" name="v_pas">
+                                <label class="f_label" for="f_checkbox_v_pas_1">Arata parola</label>
+                            </div>
+                            <div id="login_gen_pas" onclick="get_gen_pas()" class="pass_tool">
+                                <span >Genereaza Parola</span>
+                            </div>
                         </div>
                         <label id="reg_label_pas_2" class="f_label" for="reg_input_pas_2">Reintroduceti parola:</label>
                         <br>
-                        <input id="reg_input_pas_2" class="f_input" type="text" name="user_pas_2">
+                        <input id="reg_input_pas_2" class="f_input" type="password" name="user_pas_2">
+                        <div id="v_pas_2">
+                            <input type="checkbox" id="f_checkbox_v_pas_2" onclick="show_pas('reg_input_pas_2')" name="v_pas">
+                            <label class="f_label" for="f_checkbox_v_pas_2">Arata parola</label>
+                        </div>
                         <br><br>
                         <input id="f_reg_btn" class="f_btn" type="submit" name="form" value="Creaza Cont">
                     </form>

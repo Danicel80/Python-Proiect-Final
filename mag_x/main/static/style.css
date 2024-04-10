@@ -245,6 +245,17 @@ a:active, a:link, a:visited
  padding-top: 130px;
 }
 
+#pass_tool_container
+{
+ display: flex;
+ flex-direction: row;
+}
+
+.pass_tool
+{
+ width: 50%;
+}
+
 #reg_log
 {
  cursor: pointer;
@@ -406,6 +417,7 @@ a:active, a:link, a:visited
 {
  text-align: right;
  cursor: pointer;
+ padding-top: 8px;
 }
 
 #detail_container
